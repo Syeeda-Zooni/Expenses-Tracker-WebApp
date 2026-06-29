@@ -56,3 +56,60 @@ Contributions are welcome! If you find a bug or have suggestions for improvement
 
 ## License
 This project is licensed under the MIT License.
+
+# Expenses Tracker WebApp
+
+The Expenses Tracker App is a comprehensive financial management solution built using Spring Boot, Spring MVC, Spring Security, Spring Data JPA, MySQL, Thymeleaf, and Bootstrap.
+
+## Original Project
+> This repository is a fork of [mohamed0sawy/Expenses-Tracker-WebApp](https://github.com/mohamed0sawy/Expenses-Tracker-WebApp).  
+> All application source code belongs to the original author.
+
+---
+
+## 🐳 DevOps Setup (Added by Syeeda Zooni)
+
+This fork adds a complete containerization layer to the original application.
+
+### What's Added
+- Multi-stage `Dockerfile` (Maven build → JRE runtime)
+- `docker-compose.yml` (Spring Boot App + MySQL)
+- Persistent MySQL volume
+- MySQL healthcheck before app startup
+
+### Prerequisites
+- Docker
+- Docker Compose
+
+### Run the App
+
+```bash
+git clone https://github.com/Syeeda-Zooni/Expenses-Tracker-WebApp.git
+cd Expenses-Tracker-WebApp
+docker compose up -d
+```
+
+Access the app at: `http://localhost:8080`
+
+### Environment Variables
+
+| Variable | Value |
+|----------|-------|
+| SPRING_DATASOURCE_URL | jdbc:mysql://mysql:3306/expenses_tracker |
+| SPRING_DATASOURCE_USERNAME | root |
+| SPRING_DATASOURCE_PASSWORD | Test@123 |
+| MYSQL_ROOT_PASSWORD | Test@123 |
+| MYSQL_DATABASE | expenses_tracker |
+
+### Architecture
+
+```
+┌─────────────────┐        ┌─────────────────┐
+│   java-app      │──────▶ │    mysql_db     │
+│ (Spring Boot)   │        │   (MySQL 8)     │
+│   Port: 8080    │        │   Port: 3306    │
+└─────────────────┘        └─────────────────┘
+         │                          │
+         └──────────────────────────┘
+                expenses-app-nw (bridge)
+```
